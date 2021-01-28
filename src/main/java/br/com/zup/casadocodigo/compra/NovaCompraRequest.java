@@ -4,7 +4,6 @@ import br.com.zup.casadocodigo.config.validacao.CPFOuCNPJ;
 import br.com.zup.casadocodigo.config.validacao.ExistId;
 import br.com.zup.casadocodigo.estado.EstadoEntity;
 import br.com.zup.casadocodigo.pais.PaisEntity;
-import org.hibernate.validator.constraints.ConstraintComposition;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -82,5 +81,22 @@ public class NovaCompraRequest {
 
     public String getCep() {
         return cep;
+    }
+
+    @Override
+    public String toString() {
+        return "NovaCompraRequest{" +
+                "email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", documento='" + documento + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", idPais=" + idPais +
+                ", idEstado=" + idEstado +
+                ", telefone='" + telefone + '\'' +
+                ", cep='" + cep + '\'' +
+                '}';
     }
 }

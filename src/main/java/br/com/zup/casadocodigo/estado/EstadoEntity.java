@@ -1,7 +1,6 @@
 package br.com.zup.casadocodigo.estado;
 
 import br.com.zup.casadocodigo.pais.PaisEntity;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -36,5 +35,9 @@ public class EstadoEntity {
 
     public PaisEntity getPais() {
         return pais;
+    }
+
+    public boolean pertenceAPais(PaisEntity pais) {
+        return this.pais.equals(pais);
     }
 }
