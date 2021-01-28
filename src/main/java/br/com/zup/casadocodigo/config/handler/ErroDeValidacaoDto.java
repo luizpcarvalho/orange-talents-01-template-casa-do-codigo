@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.config.validacao;
+package br.com.zup.casadocodigo.config.handler;
 
 public class ErroDeValidacaoDto {
 
