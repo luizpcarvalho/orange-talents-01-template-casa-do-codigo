@@ -15,11 +15,11 @@ public class CompraController {
     @Autowired
     private EstadoPertenceAPaisValidator estadoPertenceAPaisValidator;
     @Autowired
-    private PaisPossuiEstados paisPossuiEstados;
+    private PaisPossuiEstadosValidator paisPossuiEstadosValidator;
 
     @InitBinder
     public void init(WebDataBinder binder) {
-        binder.addValidators(estadoPertenceAPaisValidator, paisPossuiEstados);
+        binder.addValidators(estadoPertenceAPaisValidator, paisPossuiEstadosValidator);
     }
 
     @PostMapping("/compras")

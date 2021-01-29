@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Component
-public class PaisPossuiEstados implements Validator {
+public class PaisPossuiEstadosValidator implements Validator {
 
     @PersistenceContext
     private EntityManager manager;
