@@ -1,6 +1,5 @@
 package br.com.zup.casadocodigo.compra;
 
-import br.com.zup.casadocodigo.estado.EstadoEntity;
 import br.com.zup.casadocodigo.pais.PaisEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -8,9 +7,11 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Component
-public class EstadoPertenceAPaisValidator implements Validator {
+public class PaisPossuiEstados implements Validator {
 
     @PersistenceContext
     private EntityManager manager;
@@ -22,19 +23,20 @@ public class EstadoPertenceAPaisValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        if(errors.hasErrors()) {
+        NovaCompraRequest request = (NovaCompraRequest) o;
+
+        if(errors.hasErrors() || request.getIdEstado() != null) {
             return;
         }
 
-        NovaCompraRequest request = (NovaCompraRequest) o;
         PaisEntity pais = manager.find(PaisEntity.class, request.getIdPais());
-        EstadoEntity estado = null;
-        if(request.getIdEstado()!=null) {
-            estado = manager.find(EstadoEntity.class, request.getIdEstado());
-            if(!estado.pertenceAPais(pais)) {
-                errors.rejectValue("idEstado", null, "Este estado não é do país selecionado.");
-            }
+
+        Query query = manager.createQuery("SELECT e FROM EstadoEntity e WHERE e.pais = :idPais");
+        query.setParameter("idPais", pais);
+        List<?> list = query.getResultList();
+
+        if(list.size() > 0) {
+            errors.rejectValue("idEstado", null, "Estado é obrigatório para o país selecionado.");
         }
     }
-
 }

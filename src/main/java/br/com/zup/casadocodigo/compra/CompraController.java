@@ -7,21 +7,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
 @RestController
 public class CompraController {
 
     @Autowired
-    private EntityManager manager;
-
-    @Autowired
     private EstadoPertenceAPaisValidator estadoPertenceAPaisValidator;
+    @Autowired
+    private PaisPossuiEstados paisPossuiEstados;
 
     @InitBinder
     public void init(WebDataBinder binder) {
-        binder.addValidators(new EstadoPertenceAPaisValidator(manager));
+        binder.addValidators(estadoPertenceAPaisValidator, paisPossuiEstados);
     }
 
     @PostMapping("/compras")

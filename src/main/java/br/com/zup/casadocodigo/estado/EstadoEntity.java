@@ -13,7 +13,6 @@ public class EstadoEntity {
     @Column(nullable = false)
     private String nome;
     @ManyToOne
-    @JoinColumn(name="pais_id", nullable=false)
     private PaisEntity pais;
 
     @Deprecated
